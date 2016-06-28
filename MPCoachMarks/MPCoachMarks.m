@@ -227,7 +227,11 @@ NSString *const kContinueLabelText = @"Tap to continue";
     // Coach mark definition
     NSDictionary *markDef = [self.coachMarks objectAtIndex:index];
     NSString *markCaption = [markDef objectForKey:@"caption"];
-    CGRect markRect = [[markDef objectForKey:@"rect"] CGRectValue];
+    UIView *theView = [markDef objectForKey:@"theView"];
+    UIView *parentView = [markDef objectForKey:@"parentView"];
+    UIView *rootView = [markDef objectForKey:@"rootView"];
+    
+    CGRect markRect = [[NSValue valueWithCGRect: [parentView convertRect:theView.frame toView:rootView]] CGRectValue];
     
     MaskShape shape = DEFAULT;
     if([[markDef allKeys] containsObject:@"shape"])
